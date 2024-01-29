@@ -1,0 +1,111 @@
+﻿@model Clientes.Models.Prospecto
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Evaluar Prospecto</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input asp-for="Nombre" class="form-control" readonly />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="PrimerApellido" class="control-label"></label>
+                    <input asp-for="PrimerApellido" class="form-control" readonly />
+                    <span asp-validation-for="PrimerApellido" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="SegundoApellido" class="control-label"></label>
+                    <input asp-for="SegundoApellido" class="form-control" readonly />
+                    <span asp-validation-for="SegundoApellido" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Calle" class="control-label"></label>
+                    <input asp-for="Calle" class="form-control" readonly />
+                    <span asp-validation-for="Calle" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Numero" class="control-label"></label>
+                    <input asp-for="Numero" class="form-control" readonly />
+                    <span asp-validation-for="Numero" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Colonia" class="control-label"></label>
+                    <input asp-for="Colonia" class="form-control" readonly />
+                    <span asp-validation-for="Colonia" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="CodigoPostal" class="control-label"></label>
+                    <input asp-for="CodigoPostal" class="form-control" readonly />
+                    <span asp-validation-for="CodigoPostal" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Telefono" class="control-label"></label>
+                    <input asp-for="Telefono" class="form-control" readonly />
+                    <span asp-validation-for="Telefono" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Rfc" class="control-label"></label>
+                    <input asp-for="Rfc" class="form-control" readonly />
+                    <span asp-validation-for="Rfc" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Estatus" class="control-label"></label>
+                    <select asp-for="Estatus" class="form-control">
+                        @if (Model.Estatus == "Enviado")
+                        {
+                            <option disabled value="@Model.Estatus" selected>@Model.Estatus</option>
+                            <option value="Autorizado">Autorizado</option>
+                                <option value="Rechazado">Rechazado</option>
+                        }
+                        else if(Model.Estatus == "Autorizado")
+                        {
+                            <option disabled value="@Model.Estatus" selected>@Model.Estatus</option>
+                            <option value="Rechazado">Rechazado</option>
+                        }else {
+                            <option disabled value="@Model.Estatus" selected>@Model.Estatus</option>
+                            <option value="Autorizado">Autorizado</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Estatus" class="text-danger"></span>
+                    <span asp-validation-for="Estatus" class="text-danger"></span>
+                </div>
+
+               
+                <div class="form-group col-md-6">
+                    <input type="hidden" class="form-control" asp-for="NombreArchivo" readonly />
+                    <span asp-validation-for="NombreArchivo" class="text-danger"></span>
+                </div>
+            </div>
+
+            
+            
+            <div class="form-group">
+                <label asp-for="Observaciones" class="control-label"></label>
+                <textarea asp-for="Observaciones" class="form-control">
+                </textarea>
+                <span asp-validation-for="Observaciones" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-5">
+                <a class="btn btn-danger" asp-action="Index">Salir</a>
+                
+                <input id="guardarEvaluacion" type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

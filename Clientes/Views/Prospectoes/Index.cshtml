@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Clientes.Models.Prospecto>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Prospectos</h1>
+
+<p>
+	<a class="btn btn-primary mt-4" asp-action="Create">Agregar Nuevo Prospecto</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				Nombre
+			</th>
+			<th>
+				Primer Apellido
+			</th>
+			<th>
+				Segundo Apellido
+			</th>
+			<th>
+			   Estatus
+			</th>
+			
+			
+			<th>Acciones</th>
+		</tr>
+	</thead>
+	<tbody>
+@foreach (var item in Model) {
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Nombre)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.PrimerApellido)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.SegundoApellido)
+			</td>
+			<td>
+				@if (item.Estatus == "Enviado")
+				{
+					<button class='btn btn-info btn-xs' value='@item.Estatus'>@Html.DisplayFor(modelItem => item.Estatus)</button>
+				}else if(item.Estatus == "Autorizado"){
+					<button class='btn btn-success btn-xs' value='@item.Estatus'>@Html.DisplayFor(modelItem => item.Estatus)</button>
+				}else {
+					<button class='btn btn-danger btn-xs text-white' value='@item.Estatus'>@Html.DisplayFor(modelItem => item.Estatus)</button>
+				}
+				
+				
+			</td>
+			<td>
+				<a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.Id">Evaluar</a>
+					<a asp-action="Details" class="btn btn-secondary" asp-route-id="@item.Id">Detalles</a>
+			</td>
+		</tr>
+}
+	</tbody>
+</table>
+
+@section Scripts {
+	<script>
+		// Obtén la URL actual
+		var currentUrl = window.location.href;
+		console.log(currentUrl);
+
+		// Verifica si el parámetro 'success' está presente en la URL
+		var isSuccess = '@ViewContext.HttpContext.Request.Query["success"]';
+		console.log(isSuccess);
+
+		if (isSuccess.toLowerCase() === 'true') {
+			Swal.fire({
+				title: "Exito",
+				text: "Prospecto Enviado Correctamente",
+				icon: "success"
+			});
+		}
+	</script>
+    
+}
